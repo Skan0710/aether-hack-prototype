@@ -28,17 +28,17 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantClasses = {
     primary:
-      'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-950/40 border border-emerald-500/30 active:scale-[0.98]',
+      'bg-emerald-600 hover:bg-emerald-500 text-white shadow-soft-sm border border-emerald-500/20 active:scale-[0.98]',
     emerald:
-      'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-950/40 border border-emerald-500/30 active:scale-[0.98]',
+      'bg-emerald-600 hover:bg-emerald-500 text-white shadow-soft-sm border border-emerald-500/20 active:scale-[0.98]',
     secondary:
       'bg-navy-800 hover:bg-navy-750 text-slate-200 border border-navy-700 hover:border-navy-600 active:scale-[0.98]',
     outline:
       'bg-transparent hover:bg-navy-800/60 text-slate-300 border border-navy-700 hover:border-slate-500 active:scale-[0.98]',
     danger:
-      'bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-950/40 border border-rose-500/30 active:scale-[0.98]',
+      'bg-rose-600 hover:bg-rose-500 text-white shadow-soft-sm border border-rose-500/20 active:scale-[0.98]',
     warning:
-      'bg-amber-600 hover:bg-amber-500 text-white shadow-lg shadow-amber-950/40 border border-amber-500/30 active:scale-[0.98]',
+      'bg-amber-600 hover:bg-amber-500 text-white shadow-soft-sm border border-amber-500/20 active:scale-[0.98]',
     ghost:
       'bg-transparent hover:bg-navy-850 text-slate-400 hover:text-slate-200',
   };

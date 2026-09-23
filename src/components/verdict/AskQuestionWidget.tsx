@@ -27,10 +27,10 @@ export const AskQuestionWidget: React.FC<AskQuestionWidgetProps> = ({ onAnswerSe
   };
 
   return (
-    <Card className="border-blue-500/30 bg-blue-950/10">
+    <Card className="border-blue-500/25">
       <CardHeader
-        title="Interactive Verification Required (ASK Policy)"
-        subtitle="Conflicting signals detected. Clarify context to determine final recommendation."
+        title="Quick check needed"
+        subtitle="A couple of signals conflict — one answer settles it"
         icon={<HelpCircle className="w-5 h-5 text-blue-400" />}
       />
       <CardContent className="space-y-4">

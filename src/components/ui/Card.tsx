@@ -15,17 +15,17 @@ export const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   const glowClasses = {
-    pass: 'border-emerald-500/30 shadow-glow-pass',
-    warn: 'border-amber-500/30 shadow-glow-warn',
-    hold: 'border-rose-500/30 shadow-glow-hold',
-    ask: 'border-blue-500/30 shadow-glow-ask',
-    accent: 'border-cyan-500/30 shadow-glow-accent',
+    pass: 'border-emerald-500/25',
+    warn: 'border-amber-500/25',
+    hold: 'border-rose-500/25',
+    ask: 'border-blue-500/25',
+    accent: 'border-cyan-500/25',
     none: 'border-navy-800',
   };
 
   return (
     <div
-      className={`bg-navy-900/90 rounded-2xl border ${glowClasses[glow]} ${
+      className={`bg-navy-900 rounded-2xl border shadow-soft-sm ${glowClasses[glow]} ${
         hoverEffect ? 'kavach-card-hover' : ''
       } ${className}`}
       {...props}
@@ -42,16 +42,16 @@ export const CardHeader: React.FC<{
   icon?: React.ReactNode;
   className?: string;
 }> = ({ title, subtitle, action, icon, className = '' }) => (
-  <div className={`p-5 pb-3 flex items-start justify-between gap-4 border-b border-navy-800/80 ${className}`}>
+  <div className={`p-5 pb-4 flex items-start justify-between gap-4 border-b border-navy-800/70 ${className}`}>
     <div className="flex items-center gap-3">
       {icon && (
-        <div className="w-9 h-9 rounded-xl bg-navy-800 border border-navy-700/80 flex items-center justify-center text-slate-300 shrink-0">
+        <div className="w-9 h-9 rounded-xl bg-navy-800 border border-navy-750 flex items-center justify-center text-slate-300 shrink-0">
           {icon}
         </div>
       )}
       <div>
         <h3 className="font-semibold text-white tracking-tight text-base">{title}</h3>
-        {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
+        {subtitle && <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{subtitle}</p>}
       </div>
     </div>
     {action && <div className="shrink-0">{action}</div>}

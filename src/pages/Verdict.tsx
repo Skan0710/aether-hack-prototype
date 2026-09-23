@@ -58,14 +58,14 @@ export const Verdict: React.FC = () => {
 
   if (!verdict) {
     return (
-      <div className="max-w-2xl mx-auto p-8 text-center space-y-4 kavach-card">
-        <ShieldAlert className="w-12 h-12 text-slate-400 mx-auto" />
-        <h2 className="text-xl font-bold text-white">No Verdict Found</h2>
+      <div className="max-w-md mx-auto p-8 text-center space-y-4 kavach-card">
+        <ShieldAlert className="w-10 h-10 text-slate-500 mx-auto" />
+        <h2 className="text-lg font-semibold text-white">No result found</h2>
         <p className="text-sm text-slate-400">
-          No payment check data was found for this reference. Run a pre-check analysis first.
+          Run a payment check first to see a verdict here.
         </p>
         <Button variant="emerald" onClick={() => navigate('/check')}>
-          Go to Payment Pre-Check
+          Check a Payment
         </Button>
       </div>
     );
@@ -106,13 +106,13 @@ export const Verdict: React.FC = () => {
       )}
 
       {/* Recommended Action Box */}
-      <div className="p-4 rounded-xl bg-navy-850 border border-cyan-500/30 flex items-start gap-3">
-        <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0 mt-0.5">
+      <div className="p-4 rounded-xl bg-navy-850 border border-navy-800 flex items-start gap-3">
+        <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 shrink-0">
           <Info className="w-4 h-4" />
         </div>
         <div className="flex-1">
-          <span className="text-xs font-mono font-semibold text-cyan-400 uppercase">
-            Recommended Action
+          <span className="text-xs font-medium text-slate-500">
+            Recommended action
           </span>
           <p className="text-sm text-white font-medium mt-0.5">
             {verdict.recommendedAction}
@@ -136,42 +136,42 @@ export const Verdict: React.FC = () => {
       )}
 
       {/* Transaction & Payee Context Card */}
-      <Card className="border-navy-750">
+      <Card>
         <CardHeader
-          title="Screened Transaction Snapshot"
-          subtitle="Submitted parameters before opening UPI application"
+          title="Transaction details"
+          subtitle="What you submitted for this check"
           icon={<Receipt className="w-5 h-5 text-emerald-400" />}
         />
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="p-3 rounded-xl bg-navy-850 border border-navy-800 space-y-1">
-              <span className="text-[11px] font-mono text-slate-400 uppercase">Payee Name</span>
-              <div className="text-sm font-semibold text-white flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-slate-400" />
+              <span className="text-[11px] text-slate-500">Payee</span>
+              <div className="text-sm font-medium text-white flex items-center gap-1.5">
+                <User className="w-3.5 h-3.5 text-slate-500" />
                 <span>{verdict.payeeDetails.name}</span>
               </div>
             </div>
 
             <div className="p-3 rounded-xl bg-navy-850 border border-navy-800 space-y-1">
-              <span className="text-[11px] font-mono text-slate-400 uppercase">UPI Handle (VPA)</span>
-              <div className="text-sm font-semibold text-white font-mono flex items-center gap-1.5">
-                <AtSign className="w-3.5 h-3.5 text-slate-400" />
+              <span className="text-[11px] text-slate-500">UPI ID</span>
+              <div className="text-sm font-medium text-white flex items-center gap-1.5">
+                <AtSign className="w-3.5 h-3.5 text-slate-500" />
                 <span>{verdict.payeeDetails.vpa}</span>
               </div>
             </div>
 
             <div className="p-3 rounded-xl bg-navy-850 border border-navy-800 space-y-1">
-              <span className="text-[11px] font-mono text-slate-400 uppercase">Amount</span>
-              <div className="text-base font-bold text-white font-mono">
+              <span className="text-[11px] text-slate-500">Amount</span>
+              <div className="text-base font-semibold text-white">
                 {formatINR(verdict.amount)}
               </div>
             </div>
 
             <div className="p-3 rounded-xl bg-navy-850 border border-navy-800 space-y-1">
-              <span className="text-[11px] font-mono text-slate-400 uppercase">History / Relation</span>
-              <div className="text-xs font-semibold text-slate-200">
-                {verdict.payeeDetails.isFirstTime ? 'First-Time Recipient' : 'Known Contact'}
-                {verdict.payeeDetails.claimedRelation && ` • Claimed "${verdict.payeeDetails.claimedRelation}"`}
+              <span className="text-[11px] text-slate-500">Relationship</span>
+              <div className="text-xs font-medium text-slate-300">
+                {verdict.payeeDetails.isFirstTime ? 'First-time recipient' : 'Known contact'}
+                {verdict.payeeDetails.claimedRelation && ` · Claimed "${verdict.payeeDetails.claimedRelation}"`}
               </div>
             </div>
           </div>
@@ -184,26 +184,24 @@ export const Verdict: React.FC = () => {
       )}
 
       {/* Action Decision Area */}
-      <Card className="border-navy-700 bg-navy-900/90 shadow-2xl">
+      <Card>
         <CardHeader
-          title="User Action & Companion Protection Handoff"
-          subtitle="PayKavach advises; your personal decision determines next steps"
+          title="What would you like to do?"
+          subtitle="PayKavach advises — the decision is always yours"
           icon={<ShieldCheck className="w-5 h-5 text-emerald-400" />}
           action={
             feedbackStatus && (
-              <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-mono capitalize">
-                Status: {feedbackStatus}
+              <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 capitalize">
+                {feedbackStatus.replace('_', ' ')}
               </span>
             )
           }
         />
         <CardContent className="space-y-4">
           {/* Boundary Notice */}
-          <div className="p-3 rounded-xl bg-navy-850 border border-navy-800 text-xs text-slate-300 flex items-start gap-2">
-            <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-            <p>
-              <strong className="text-white">Companion Boundary:</strong> PayKavach does not block bank accounts or auto-cancel UPI transfers. Safe transactions generate standard UPI intents.
-            </p>
+          <div className="p-3 rounded-xl bg-navy-850 border border-navy-800 text-xs text-slate-400 flex items-start gap-2">
+            <Info className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+            <p>PayKavach doesn't block your bank account or auto-cancel transfers — it only advises before you pay.</p>
           </div>
 
           {/* Conditional Action Buttons */}
@@ -216,9 +214,9 @@ export const Verdict: React.FC = () => {
                   size="lg"
                   leftIcon={<PhoneCall className="w-5 h-5" />}
                   onClick={() => setShowMomCallModal(true)}
-                  className="shadow-glow-pass w-full"
+                  className="w-full"
                 >
-                  Call Mom Now (Verified Number)
+                  Call Mom Now
                 </Button>
 
                 {/* 2. 10-Minute Cool-Off */}
@@ -229,7 +227,7 @@ export const Verdict: React.FC = () => {
                   onClick={() => setShowCoolOffModal(true)}
                   className="w-full"
                 >
-                  Continue After 10-Min Cool-Off
+                  10-Minute Cool-Off
                 </Button>
               </div>
 
@@ -239,13 +237,13 @@ export const Verdict: React.FC = () => {
                   variant="danger"
                   size="sm"
                   leftIcon={<XCircle className="w-4 h-4" />}
-                  onClick={() => handleAction('cancelled', 'Payment check marked as Cancelled. Fraud avoided!')}
+                  onClick={() => handleAction('cancelled', 'Payment cancelled. Fraud avoided!')}
                 >
-                  Cancel Payment (Avoid Scam)
+                  Cancel Payment
                 </Button>
                 {coolOffCompleted && (
-                  <span className="text-xs text-amber-400 font-mono">
-                    Cool-off period elapsed. Risk override unlocked.
+                  <span className="text-xs text-amber-400">
+                    Cool-off complete — override unlocked.
                   </span>
                 )}
               </div>
@@ -255,12 +253,12 @@ export const Verdict: React.FC = () => {
           {verdict.verdict === 'WARN' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Button
-                variant="warning"
+                variant="emerald"
                 size="lg"
                 leftIcon={<Timer className="w-5 h-5" />}
                 onClick={() => handleAction('remind_1st', 'Reminder scheduled for the 1st of the month after salary credit.')}
               >
-                Remind Me on the 1st
+                Remind Me on the 1st (Recommended)
               </Button>
               <Button
                 variant="outline"
@@ -290,7 +288,7 @@ export const Verdict: React.FC = () => {
                   setShowUpiModal(true);
                   handleAction('paid', 'Initiating UPI intent handoff.');
                 }}
-                className="shadow-glow-pass w-full sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 Open UPI App ({formatINR(verdict.amount)})
               </Button>

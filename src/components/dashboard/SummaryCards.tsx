@@ -14,20 +14,20 @@ export const SummaryCards: React.FC = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {/* 1. Available Balance */}
-      <Card className="p-5 relative overflow-hidden group border-navy-750">
+      <Card className="p-5 relative overflow-hidden group">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-slate-400 font-mono uppercase tracking-wider">
+          <span className="text-xs font-medium text-slate-500">
             Available Balance
           </span>
-          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
             <Wallet className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-3">
-          <div className="text-2xl lg:text-3xl font-bold text-white tracking-tight font-mono">
+          <div className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {formatINR(INITIAL_DEMO_USER.currentBalance)}
           </div>
-          <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-400">
+          <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-500">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
             <span>Salary lands 1st of month</span>
           </div>
@@ -35,64 +35,64 @@ export const SummaryCards: React.FC = () => {
       </Card>
 
       {/* 2. Protection Engine */}
-      <Card className="p-5 relative overflow-hidden group border-navy-750">
+      <Card className="p-5 relative overflow-hidden group">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-slate-400 font-mono uppercase tracking-wider">
+          <span className="text-xs font-medium text-slate-500">
             AI Kavach Status
           </span>
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
             <ShieldCheck className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-3">
           <div className="text-2xl lg:text-3xl font-bold text-emerald-400 tracking-tight flex items-center gap-2">
             Active
-            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-medium">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-medium">
               4 Models
             </span>
           </div>
-          <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-400">
+          <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-500">
             <span>Voice, Script, Payee & Cash-Flow</span>
           </div>
         </div>
       </Card>
 
       {/* 3. Upcoming Obligations */}
-      <Card className="p-5 relative overflow-hidden group border-navy-750">
+      <Card className="p-5 relative overflow-hidden group">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-slate-400 font-mono uppercase tracking-wider">
-            Upcoming Due (5d)
+          <span className="text-xs font-medium text-slate-500">
+            Upcoming in 5 Days
           </span>
-          <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+          <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400">
             <CalendarClock className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-3">
-          <div className="text-2xl lg:text-3xl font-bold text-amber-300 tracking-tight font-mono">
+          <div className="text-2xl lg:text-3xl font-bold text-amber-300 tracking-tight">
             {formatINR(totalObligations)}
           </div>
-          <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-400">
+          <div className="flex items-center gap-1.5 mt-2 text-xs text-slate-500">
             <span>Rent, EMI & Electricity</span>
           </div>
         </div>
       </Card>
 
       {/* 4. Credit Passport */}
-      <Card className="p-5 relative overflow-hidden group border-navy-750">
+      <Card className="p-5 relative overflow-hidden group">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-slate-400 font-mono uppercase tracking-wider">
+          <span className="text-xs font-medium text-slate-500">
             Credit Passport
           </span>
-          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
             <Award className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-3">
           <div className="flex items-baseline justify-between">
-            <div className="text-2xl lg:text-3xl font-bold text-white tracking-tight font-mono">
-              78<span className="text-sm font-normal text-slate-400">/100</span>
+            <div className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
+              78<span className="text-sm font-normal text-slate-500">/100</span>
             </div>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-medium">
               Low Risk
             </span>
           </div>

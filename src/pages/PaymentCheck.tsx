@@ -124,19 +124,13 @@ export const PaymentCheck: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-300">
       {/* Page Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 font-mono">
-            <Scan className="w-4 h-4" />
-            <span>AI PRE-PAYMENT SCREENING</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
-            Payment Pre-Check
-          </h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Evaluate risks across scam scripts, synthetic voice clones, payee reputation, and cash-flow obligations before opening your UPI app.
-          </p>
-        </div>
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          Check a payment
+        </h1>
+        <p className="text-sm text-slate-400 mt-1.5 max-w-xl">
+          A quick screen for scam scripts, voice clones, and cash-flow risk — before you open your UPI app.
+        </p>
       </div>
 
       {/* Predefined Scenarios Selector */}
@@ -144,15 +138,15 @@ export const PaymentCheck: React.FC = () => {
 
       {/* Main Pre-Check Form */}
       <form onSubmit={handleAnalyze}>
-        <Card className="border-navy-750 shadow-xl overflow-hidden">
+        <Card className="overflow-hidden">
           <CardHeader
-            title="Payment Details & Context"
-            subtitle="Enter transaction parameters for multi-model AI inspection"
+            title="Payment details"
+            subtitle="Who you're paying and how much"
             icon={<ShieldAlert className="w-5 h-5 text-emerald-400" />}
             action={
               selectedScenarioId && (
-                <span className="text-xs px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-mono">
-                  Autofilled from {selectedScenarioId}
+                <span className="text-xs px-2.5 py-1 rounded-full bg-navy-800 text-slate-300">
+                  Autofilled from scenario
                 </span>
               )
             }
@@ -213,19 +207,19 @@ export const PaymentCheck: React.FC = () => {
             <div className="space-y-2">
               <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
                 <IndianRupee className="w-3.5 h-3.5 text-slate-400" />
-                <span>Payment Amount (₹)</span>
+                <span>Amount</span>
                 <span className="text-rose-400">*</span>
               </label>
               <div className="relative">
-                <span className="absolute left-3.5 top-2.5 text-slate-400 font-mono text-base">₹</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-2xl font-semibold">₹</span>
                 <input
                   type="number"
                   placeholder="0"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value ? Number(e.target.value) : '')}
-                  className={`w-full pl-8 pr-4 py-2.5 rounded-xl bg-navy-850 border font-mono text-lg font-semibold ${
+                  className={`w-full pl-9 pr-4 py-3.5 rounded-xl bg-navy-850 border text-3xl font-bold tracking-tight ${
                     errors.amount ? 'border-rose-500' : 'border-navy-700 focus:border-emerald-500'
-                  } text-white placeholder-slate-400 focus:outline-none transition-colors`}
+                  } text-white placeholder-slate-600 focus:outline-none transition-colors`}
                 />
               </div>
               {errors.amount && (
@@ -236,18 +230,22 @@ export const PaymentCheck: React.FC = () => {
               )}
               {/* Quick Amount Selectors */}
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="text-[11px] text-slate-400">Quick amounts:</span>
                 {quickAmounts.map((q) => (
                   <button
                     key={q}
                     type="button"
                     onClick={() => setAmount(q)}
-                    className="px-2.5 py-1 rounded-lg bg-navy-800 hover:bg-navy-750 text-slate-300 text-xs font-mono border border-navy-700 transition-colors"
+                    className="px-2.5 py-1 rounded-lg bg-navy-800 hover:bg-navy-750 text-slate-300 text-xs border border-navy-700 transition-colors"
                   >
                     ₹{q.toLocaleString('en-IN')}
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* Context & Voice section */}
+            <div className="pt-1 border-t border-navy-800">
+              <h4 className="text-xs font-semibold text-slate-300 mt-4 mb-3">Context & voice</h4>
             </div>
 
             {/* Purpose & Claimed Relationship */}
@@ -312,7 +310,7 @@ export const PaymentCheck: React.FC = () => {
             </div>
 
             {/* Checkbox: First-time payee */}
-            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-navy-850/60 border border-navy-800">
+            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-navy-850 border border-navy-800">
               <input
                 type="checkbox"
                 id="firstTimePayee"
@@ -321,10 +319,8 @@ export const PaymentCheck: React.FC = () => {
                 className="w-4 h-4 text-emerald-600 bg-navy-800 border-navy-700 rounded focus:ring-emerald-500"
               />
               <label htmlFor="firstTimePayee" className="text-xs text-slate-300 cursor-pointer">
-                <span className="font-semibold text-white">First-time payment to this payee</span>
-                <span className="text-slate-400 ml-1.5">
-                  (Triggers elevated verification for unverified VPAs)
-                </span>
+                <span className="font-medium text-white">First time paying this person</span>
+                <span className="text-slate-500 ml-1.5">— adds extra verification</span>
               </label>
             </div>
 
@@ -340,15 +336,12 @@ export const PaymentCheck: React.FC = () => {
 
             {/* Analysis Progress Overlay (when active) */}
             {isAnalyzing && (
-              <div className="p-4 rounded-xl bg-navy-850 border border-emerald-500/40 space-y-2 animate-in fade-in">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-emerald-400 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 animate-spin text-emerald-400" />
-                    <span>PayKavach Multi-Model Neural Risk Engine</span>
-                  </span>
-                  <span className="text-[11px] font-mono text-slate-400">Evaluating...</span>
+              <div className="p-4 rounded-xl bg-navy-850 border border-navy-800 space-y-2 animate-in fade-in">
+                <div className="flex items-center gap-2 text-xs font-medium text-emerald-400">
+                  <Sparkles className="w-4 h-4 animate-spin" />
+                  <span>Screening your payment…</span>
                 </div>
-                <p className="text-xs text-slate-200 font-mono">{scanStep}</p>
+                <p className="text-xs text-slate-400">{scanStep}</p>
                 <div className="w-full bg-navy-900 rounded-full h-1.5 overflow-hidden">
                   <div className="bg-emerald-400 h-1.5 rounded-full animate-pulse w-3/4"></div>
                 </div>
@@ -357,9 +350,9 @@ export const PaymentCheck: React.FC = () => {
 
             {/* Submit Action */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-xs text-slate-400">
+              <div className="flex items-center gap-2 text-xs text-slate-500">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Zero banking credentials or UPI PIN requested</span>
+                <span>No banking credentials or UPI PIN requested</span>
               </div>
               <Button
                 type="submit"
@@ -368,9 +361,9 @@ export const PaymentCheck: React.FC = () => {
                 isLoading={isAnalyzing}
                 leftIcon={<Scan className="w-5 h-5" />}
                 rightIcon={<ArrowRight className="w-4 h-4" />}
-                className="w-full sm:w-auto shadow-glow-pass"
+                className="w-full sm:w-auto"
               >
-                Analyze Payment Before Paying
+                Check This Payment
               </Button>
             </div>
           </CardContent>

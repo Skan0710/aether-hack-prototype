@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldAlert, Sparkles, ArrowRight } from 'lucide-react';
+import { ShieldAlert, ArrowRight } from 'lucide-react';
 import { SummaryCards } from '../components/dashboard/SummaryCards';
 import { ObligationsCard } from '../components/dashboard/ObligationsCard';
 import { CreditPassportWidget } from '../components/dashboard/CreditPassportWidget';
@@ -15,31 +15,25 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* Top Banner Greeting */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-navy-900 via-navy-850 to-navy-900 border border-navy-750 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+      <div className="p-6 sm:p-8 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 font-mono">
-            <Sparkles className="w-4 h-4" />
-            <span>FINANCIAL SAFETY COMPANION</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
-            Hello, {INITIAL_DEMO_USER.name}
+          <h1 className="text-2xl sm:text-[28px] font-bold text-white tracking-tight">
+            Good evening, {INITIAL_DEMO_USER.name.split(' ')[0]}
           </h1>
-          <p className="text-sm text-slate-400 mt-1 max-w-xl">
-            PayKavach is monitoring your pre-payment risk. Every UPI payment is evaluated for scam playbooks, AI voice clones, and cash-flow obligations before you pay.
+          <p className="text-sm text-slate-400 mt-1.5">
+            Your pre-payment guard is active.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <Button
-            size="lg"
-            variant="emerald"
-            leftIcon={<ShieldAlert className="w-5 h-5" />}
-            rightIcon={<ArrowRight className="w-4 h-4" />}
-            onClick={() => navigate('/check')}
-            className="shadow-glow-pass w-full sm:w-auto"
-          >
-            Check a Payment Now
-          </Button>
-        </div>
+        <Button
+          size="lg"
+          variant="emerald"
+          leftIcon={<ShieldAlert className="w-5 h-5" />}
+          rightIcon={<ArrowRight className="w-4 h-4" />}
+          onClick={() => navigate('/check')}
+          className="w-full sm:w-auto"
+        >
+          Check a Payment
+        </Button>
       </div>
 
       {/* 4 Summary Metric Cards */}

@@ -26,11 +26,11 @@ export const DemoScenarioSelector: React.FC<DemoScenarioSelectorProps> = ({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-1.5 font-mono">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Predefined Hackathon Scenarios</span>
+        <label className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+          <Sparkles className="w-3.5 h-3.5 text-slate-500" />
+          <span>Try a scenario</span>
         </label>
-        <span className="text-[11px] text-slate-400">Click to autofill exact test case</span>
+        <span className="text-[11px] text-slate-500">Autofills the form below</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

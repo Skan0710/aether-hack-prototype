@@ -46,35 +46,57 @@ export const CoolOffTimerModal: React.FC<CoolOffTimerModalProps> = ({
     setSecondsRemaining(3);
   };
 
+  const progress = ((600 - secondsRemaining) / 600) * 100;
+
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Mandatory 10-Minute Behavioral Cool-Off"
-      subtitle="Psychological intervention against artificial urgency"
+      title="10-minute cool-off"
+      subtitle="A short pause before you send money under pressure"
       maxWidth="md"
     >
       <div className="space-y-5 text-center py-2">
         <div className="flex flex-col items-center">
-          <div className="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-3 shadow-glow-warn">
-            <Timer className="w-8 h-8" />
+          <div className="relative w-28 h-28 flex items-center justify-center mb-1">
+            <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+              <path
+                className="text-navy-800"
+                strokeWidth="3"
+                stroke="currentColor"
+                fill="none"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+              <path
+                className="text-amber-400 transition-all duration-1000 ease-linear"
+                strokeDasharray={`${progress}, 100`}
+                strokeWidth="3"
+                strokeLinecap="round"
+                stroke="currentColor"
+                fill="none"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+            </svg>
+            <div className="absolute flex flex-col items-center">
+              <Timer className="w-4 h-4 text-amber-400 mb-1" />
+              <span className="text-2xl font-bold text-white tabular-nums">
+                {formatTime(secondsRemaining)}
+              </span>
+            </div>
           </div>
-          <div className="text-4xl font-extrabold text-white font-mono tracking-wider">
-            {formatTime(secondsRemaining)}
-          </div>
-          <span className="text-xs text-amber-400 font-medium mt-1">
-            {secondsRemaining > 0 ? 'Cool-off active. Emergency panic fading.' : 'Cool-off period elapsed.'}
+          <span className="text-xs text-slate-400 mt-1">
+            {secondsRemaining > 0 ? 'Take a breath — the urgency will pass.' : 'Cool-off complete.'}
           </span>
         </div>
 
         {/* Psychological Context Box */}
-        <div className="p-4 rounded-xl bg-navy-850 border border-navy-750 text-left space-y-2 text-xs">
-          <div className="flex items-center gap-1.5 text-amber-400 font-semibold font-mono">
-            <AlertTriangle className="w-3.5 h-3.5" />
-            <span>Why is this cool-off required?</span>
+        <div className="p-4 rounded-xl bg-navy-850 border border-navy-800 text-left space-y-1.5 text-xs">
+          <div className="flex items-center gap-1.5 text-slate-300 font-medium">
+            <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+            <span>Why this matters</span>
           </div>
-          <p className="text-slate-300 leading-relaxed">
-            Emergency extortion scams rely on the victim being in an active state of panic for the first 7 minutes. Taking 10 minutes breaks the social engineering loop and gives you time to call trusted family members directly.
+          <p className="text-slate-400 leading-relaxed">
+            Emergency scams rely on panic in the first few minutes. Ten minutes is usually enough time to call someone you trust and check if the request is real.
           </p>
         </div>
 
@@ -84,10 +106,10 @@ export const CoolOffTimerModal: React.FC<CoolOffTimerModalProps> = ({
             <button
               type="button"
               onClick={handleFastForward}
-              className="text-xs px-3 py-1.5 rounded-lg bg-navy-800 text-cyan-400 hover:text-cyan-300 border border-navy-700 hover:border-cyan-500/30 flex items-center gap-1.5 transition-colors font-mono"
+              className="text-xs px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-300 flex items-center gap-1.5 transition-colors"
             >
               <FastForward className="w-3.5 h-3.5" />
-              <span>Fast-forward timer (Judge / Demo Presentation)</span>
+              <span>Fast-forward (demo mode)</span>
             </button>
           </div>
         )}
@@ -95,7 +117,7 @@ export const CoolOffTimerModal: React.FC<CoolOffTimerModalProps> = ({
         {/* Actions */}
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Button variant="secondary" size="md" onClick={onClose}>
-            Back to Safety Verdict
+            Back to Verdict
           </Button>
           <Button
             variant="danger"
@@ -107,7 +129,7 @@ export const CoolOffTimerModal: React.FC<CoolOffTimerModalProps> = ({
               onClose();
             }}
           >
-            {secondsRemaining > 0 ? `Wait (${secondsRemaining}s)` : 'Acknowledge Risk & Continue'}
+            {secondsRemaining > 0 ? `Wait (${secondsRemaining}s)` : 'Continue Anyway'}
           </Button>
         </div>
       </div>

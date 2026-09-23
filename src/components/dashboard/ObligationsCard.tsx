@@ -12,7 +12,7 @@ export const ObligationsCard: React.FC = () => {
       case 'emi':
         return <Landmark className="w-4 h-4 text-amber-400" />;
       case 'utility':
-        return <Zap className="w-4 h-4 text-cyan-400" />;
+        return <Zap className="w-4 h-4 text-slate-300" />;
       default:
         return <CalendarClock className="w-4 h-4 text-slate-400" />;
     }
@@ -27,7 +27,7 @@ export const ObligationsCard: React.FC = () => {
         subtitle="Mandatory payments scheduled before next salary"
         icon={<CalendarClock className="w-5 h-5 text-amber-400" />}
         action={
-          <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-medium">
+          <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 font-medium">
             Due in 5 days
           </span>
         }
@@ -45,9 +45,9 @@ export const ObligationsCard: React.FC = () => {
               <div>
                 <p className="text-sm font-medium text-white">{item.name}</p>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-[11px] text-slate-400 font-mono">{item.dueDate}</span>
+                  <span className="text-[11px] text-slate-500">{item.dueDate}</span>
                   {item.isAutopay && (
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-navy-800 text-slate-400 border border-navy-700">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-navy-800 text-slate-500">
                       Auto-Debit
                     </span>
                   )}
@@ -55,7 +55,7 @@ export const ObligationsCard: React.FC = () => {
               </div>
             </div>
             <div className="text-right">
-              <span className="text-sm font-semibold text-white font-mono">
+              <span className="text-sm font-semibold text-white">
                 {formatINR(item.amount)}
               </span>
             </div>
@@ -66,9 +66,9 @@ export const ObligationsCard: React.FC = () => {
         <div className="mt-4 pt-3 border-t border-navy-800 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-xs text-slate-400">
             <AlertCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span>Reserved cash requirement:</span>
+            <span>Reserved cash requirement</span>
           </div>
-          <span className="text-base font-bold text-amber-400 font-mono">
+          <span className="text-base font-bold text-amber-400">
             {formatINR(total)}
           </span>
         </div>

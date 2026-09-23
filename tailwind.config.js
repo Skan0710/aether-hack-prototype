@@ -8,15 +8,16 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Matte charcoal scale — calm, low-saturation dark UI (Linear/Stripe inspired)
         navy: {
-          950: '#070b14',
-          900: '#0b1120',
-          850: '#0f172a',
-          800: '#141f36',
-          750: '#1a2744',
-          700: '#1e2e4f',
-          600: '#2d3f66',
-          500: '#415582',
+          950: '#08090c',
+          900: '#0d0f14',
+          850: '#12141a',
+          800: '#171a21',
+          750: '#1d2028',
+          700: '#252932',
+          600: '#333844',
+          500: '#4b5261',
         },
         kavach: {
           pass: '#10B981',    // Emerald safe
@@ -24,20 +25,19 @@ export default {
           hold: '#EF4444',    // Rose danger
           ask: '#3B82F6',     // Blue interactive
           accent: '#06B6D4',  // Cyan highlight
-          card: '#0f172a',    // Elevated card
-          border: '#1e293b',  // Subtle border
+          card: '#12141a',    // Elevated card
+          border: '#1d2028',  // Subtle border
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Poppins', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       boxShadow: {
-        'glow-pass': '0 0 20px -3px rgba(16, 185, 129, 0.25)',
-        'glow-warn': '0 0 20px -3px rgba(245, 158, 11, 0.25)',
-        'glow-hold': '0 0 20px -3px rgba(239, 68, 68, 0.25)',
-        'glow-ask': '0 0 20px -3px rgba(59, 130, 246, 0.25)',
-        'glow-accent': '0 0 25px -4px rgba(6, 182, 212, 0.3)',
+        'soft-sm': '0 1px 2px 0 rgba(0, 0, 0, 0.4)',
+        'soft-md': '0 4px 16px -4px rgba(0, 0, 0, 0.45)',
+        'soft-lg': '0 12px 32px -8px rgba(0, 0, 0, 0.55)',
+        'soft-xl': '0 20px 48px -12px rgba(0, 0, 0, 0.6)',
       }
     },
   },

@@ -72,7 +72,7 @@ export const Settings: React.FC = () => {
         <CardHeader
           title="Display Language"
           subtitle="Toggle application explanations and UI text"
-          icon={<Globe className="w-5 h-5 text-cyan-400" />}
+          icon={<Globe className="w-5 h-5 text-emerald-400" />}
         />
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -129,7 +129,7 @@ export const Settings: React.FC = () => {
 
           <div className="p-4 rounded-xl bg-navy-850 border border-navy-800 space-y-2">
             <div className="flex items-center gap-2 text-white font-semibold">
-              <Cpu className="w-4 h-4 text-cyan-400" />
+              <Cpu className="w-4 h-4 text-emerald-400" />
               <span>Companion Architecture: No Simulated OS Blocking</span>
             </div>
             <p className="text-slate-400 leading-relaxed">

@@ -4,7 +4,6 @@ import { Card, CardHeader, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';
 import {
-  Award,
   ShieldCheck,
   Share2,
   HelpCircle,
@@ -50,15 +49,11 @@ export const CreditPassport: React.FC = () => {
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 font-mono">
-            <Award className="w-4 h-4" />
-            <span>EXPLAINABLE CASH-FLOW FINANCIAL PASSPORT</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Credit Passport
           </h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Alternative creditworthiness derived transparently from cash-flow health, payroll regularity, and obligation discipline.
+          <p className="text-sm text-slate-400 mt-1.5 max-w-lg">
+            Your creditworthiness, explained — built from cash-flow health, salary regularity, and how reliably you pay.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -68,14 +63,13 @@ export const CreditPassport: React.FC = () => {
             leftIcon={<HelpCircle className="w-4 h-4" />}
             onClick={() => setShowExplainModal(true)}
           >
-            See Full Explanation
+            How this is calculated
           </Button>
           <Button
             variant="emerald"
             size="md"
             leftIcon={<Share2 className="w-4 h-4" />}
             onClick={() => setShowShareModal(true)}
-            className="shadow-glow-pass"
           >
             Share With Lender via AA
           </Button>
@@ -83,15 +77,15 @@ export const CreditPassport: React.FC = () => {
       </div>
 
       {/* Synthetic Disclosure Warning */}
-      <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 flex items-start gap-3 text-xs text-slate-300">
-        <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+      <div className="p-3.5 rounded-xl bg-navy-850 border border-navy-800 flex items-start gap-3 text-xs text-slate-400">
+        <Info className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
         <p className="leading-relaxed">
-          <strong className="text-white">Synthetic Demo Assessment:</strong> {DEMO_CREDIT_PASSPORT.syntheticDisclosure}
+          <strong className="text-slate-300">Synthetic demo data:</strong> {DEMO_CREDIT_PASSPORT.syntheticDisclosure}
         </p>
       </div>
 
       {/* Main Score & Risk Tier Card */}
-      <Card className="border-emerald-500/30 bg-gradient-to-r from-navy-900 via-navy-850 to-emerald-950/20 shadow-glow-pass">
+      <Card className="border-emerald-500/25">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             {/* Score & Tier */}
@@ -116,54 +110,54 @@ export const CreditPassport: React.FC = () => {
                   />
                 </svg>
                 <div className="absolute text-center">
-                  <span className="text-3xl font-extrabold text-white font-mono leading-none block">
+                  <span className="text-3xl font-bold text-white leading-none block">
                     {DEMO_CREDIT_PASSPORT.score}
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono">/ 100</span>
+                  <span className="text-[10px] text-slate-500">/ 100</span>
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold text-xs font-mono">
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-semibold text-xs">
                     {DEMO_CREDIT_PASSPORT.riskTier}
                   </span>
-                  <span className="text-xs text-slate-400 font-mono">
-                    Evaluation Period: {DEMO_CREDIT_PASSPORT.assessmentDate}
+                  <span className="text-xs text-slate-500">
+                    As of {DEMO_CREDIT_PASSPORT.assessmentDate}
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-white">
-                  Strong Cash-Flow Repayment Capacity
+                  Strong repayment capacity
                 </h3>
-                <p className="text-xs text-slate-300 max-w-lg leading-relaxed">
-                  Demonstrated ability to meet routine obligations ahead of schedule, supported by unbroken monthly salary credits and strict spending discipline.
+                <p className="text-xs text-slate-400 max-w-lg leading-relaxed">
+                  Consistently meets obligations ahead of schedule, backed by unbroken monthly salary credits and steady spending habits.
                 </p>
               </div>
             </div>
 
             {/* Quick Metrics Capsule */}
             <div className="grid grid-cols-2 gap-3 min-w-[240px]">
-              <div className="p-3 rounded-xl bg-navy-850/80 border border-navy-750">
-                <span className="text-[10px] text-slate-400 uppercase font-mono">On-Time Rate</span>
-                <p className="text-base font-bold text-emerald-400 font-mono mt-0.5">
+              <div className="p-3 rounded-xl bg-navy-850 border border-navy-800">
+                <span className="text-[11px] text-slate-500">On-Time Rate</span>
+                <p className="text-base font-semibold text-emerald-400 mt-0.5">
                   {DEMO_CREDIT_PASSPORT.metrics.onTimeRate}%
                 </p>
               </div>
-              <div className="p-3 rounded-xl bg-navy-850/80 border border-navy-750">
-                <span className="text-[10px] text-slate-400 uppercase font-mono">Salary Regularity</span>
-                <p className="text-base font-bold text-white font-mono mt-0.5">
+              <div className="p-3 rounded-xl bg-navy-850 border border-navy-800">
+                <span className="text-[11px] text-slate-500">Salary Regularity</span>
+                <p className="text-base font-semibold text-white mt-0.5">
                   {DEMO_CREDIT_PASSPORT.metrics.salaryRegularity}
                 </p>
               </div>
-              <div className="p-3 rounded-xl bg-navy-850/80 border border-navy-750">
-                <span className="text-[10px] text-slate-400 uppercase font-mono">Spending Volatility</span>
-                <p className="text-base font-bold text-cyan-400 font-mono mt-0.5">
+              <div className="p-3 rounded-xl bg-navy-850 border border-navy-800">
+                <span className="text-[11px] text-slate-500">Spending Volatility</span>
+                <p className="text-base font-semibold text-emerald-400 mt-0.5">
                   {DEMO_CREDIT_PASSPORT.metrics.spendingStability}
                 </p>
               </div>
-              <div className="p-3 rounded-xl bg-navy-850/80 border border-navy-750">
-                <span className="text-[10px] text-slate-400 uppercase font-mono">Savings Buffer</span>
-                <p className="text-base font-bold text-slate-200 font-mono mt-0.5">
+              <div className="p-3 rounded-xl bg-navy-850 border border-navy-800">
+                <span className="text-[11px] text-slate-500">Savings Buffer</span>
+                <p className="text-base font-semibold text-slate-200 mt-0.5">
                   {DEMO_CREDIT_PASSPORT.metrics.savingsBufferMonths} Months
                 </p>
               </div>
@@ -174,20 +168,20 @@ export const CreditPassport: React.FC = () => {
 
       {/* 4 Financial Factors Breakdown Grid */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300 font-mono flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-slate-300 flex items-center gap-2">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Core Evaluated Behavioral Factors</span>
+          <span>What shaped this score</span>
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {DEMO_CREDIT_PASSPORT.factors.map((factor) => {
             const isNegative = factor.rating === 'small_negative';
             const badgeClass = isNegative
-              ? 'bg-amber-500/10 text-amber-300 border-amber-500/30'
-              : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30';
+              ? 'bg-amber-500/10 text-amber-300'
+              : 'bg-emerald-500/10 text-emerald-300';
 
             return (
-              <Card key={factor.id} className="p-4 border-navy-750 space-y-2.5">
+              <Card key={factor.id} className="p-4 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     {isNegative ? (
@@ -197,16 +191,16 @@ export const CreditPassport: React.FC = () => {
                     )}
                     <h4 className="text-sm font-semibold text-white">{factor.name}</h4>
                   </div>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-mono font-medium border ${badgeClass}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${badgeClass}`}>
                     {factor.impactText}
                   </span>
                 </div>
 
                 <div className="flex items-baseline gap-2">
-                  <span className="text-xs font-mono text-cyan-400 font-semibold">{factor.metric}</span>
+                  <span className="text-xs text-emerald-400 font-medium">{factor.metric}</span>
                 </div>
 
-                <p className="text-xs text-slate-300 leading-relaxed">{factor.detail}</p>
+                <p className="text-xs text-slate-400 leading-relaxed">{factor.detail}</p>
               </Card>
             );
           })}
@@ -214,11 +208,11 @@ export const CreditPassport: React.FC = () => {
       </div>
 
       {/* 12-Month Liquidity & Stability Trajectory Chart */}
-      <Card className="border-navy-750">
+      <Card>
         <CardHeader
-          title="12-Month Cash-Flow Stability & Discipline Trajectory"
-          subtitle="Simulated monthly balance floor vs discretionary spending bounds"
-          icon={<TrendingUp className="w-5 h-5 text-cyan-400" />}
+          title="12-month stability trend"
+          subtitle="Month-end balance vs. discretionary spending"
+          icon={<TrendingUp className="w-5 h-5 text-emerald-400" />}
         />
         <CardContent>
           <div className="h-64 w-full">
@@ -240,10 +234,10 @@ export const CreditPassport: React.FC = () => {
                   content={({ active, payload, label }) => {
                     if (active && payload && payload.length) {
                       return (
-                        <div className="bg-navy-900 border border-navy-750 p-2.5 rounded-lg shadow-xl text-xs font-mono">
-                          <p className="text-white font-bold">{label} 2026</p>
-                          <p className="text-emerald-400 mt-1">Month-End Balance: ₹{payload[0].value?.toLocaleString('en-IN')}</p>
-                          <p className="text-cyan-400">Total Spend: ₹{payload[1].value?.toLocaleString('en-IN')}</p>
+                        <div className="bg-navy-900 border border-navy-750 p-2.5 rounded-lg shadow-soft-lg text-xs">
+                          <p className="text-white font-semibold">{label} 2026</p>
+                          <p className="text-emerald-400 mt-1">Balance: ₹{payload[0].value?.toLocaleString('en-IN')}</p>
+                          <p className="text-emerald-400">Spend: ₹{payload[1].value?.toLocaleString('en-IN')}</p>
                         </div>
                       );
                     }
@@ -258,11 +252,11 @@ export const CreditPassport: React.FC = () => {
           <div className="flex items-center justify-center gap-6 mt-3 text-xs">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-emerald-400" />
-              <span className="text-slate-300">Month-End Liquidity Floor</span>
+              <span className="text-slate-400">Month-end balance</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-cyan-400" />
-              <span className="text-slate-300">Discretionary Outflow (Bounded ±8%)</span>
+              <span className="w-3 h-3 rounded-full bg-slate-500" />
+              <span className="text-slate-400">Spending (±8% band)</span>
             </div>
           </div>
         </CardContent>
@@ -272,36 +266,36 @@ export const CreditPassport: React.FC = () => {
       <Modal
         isOpen={showShareModal}
         onClose={() => setShowShareModal(false)}
-        title="Simulated Account Aggregator (AA) Sharing"
-        subtitle="Consent-driven financial data sharing under RBI AA Framework"
+        title="Share with a lender"
+        subtitle="Consent-driven sharing via the RBI Account Aggregator framework"
         maxWidth="lg"
       >
         <div className="space-y-4 text-xs">
-          <div className="p-3 rounded-xl bg-navy-850 border border-navy-750 space-y-2">
+          <div className="p-3 rounded-xl bg-navy-850 border border-navy-800 space-y-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 font-mono">Financial Information User (FIU):</span>
+              <span className="text-slate-500">Requesting lender</span>
               <span className="font-semibold text-white flex items-center gap-1.5">
-                <Building className="w-3.5 h-3.5 text-cyan-400" />
+                <Building className="w-3.5 h-3.5 text-emerald-400" />
                 <span>HDFC Bank Digital Lending Portal</span>
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 font-mono">Account Aggregator Handle:</span>
+              <span className="text-slate-500">Account Aggregator handle</span>
               <span className="font-mono text-emerald-400 font-semibold">aarav@anumati</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 font-mono">Shared Data Scope:</span>
-              <span className="text-slate-200">Cash-Flow Health, Salary Regularity, 12M Outflow Volatility</span>
+              <span className="text-slate-500">Data being shared</span>
+              <span className="text-slate-300">Cash-flow health, salary regularity, spending volatility</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 font-mono">Consent Expiry:</span>
-              <span className="text-slate-200">1 Time Fetch (Expires in 30 minutes)</span>
+              <span className="text-slate-500">Consent expiry</span>
+              <span className="text-slate-300">One-time fetch, expires in 30 minutes</span>
             </div>
           </div>
 
           <div className="p-3 rounded-xl bg-navy-900 border border-navy-800 space-y-1">
-            <span className="text-[10px] font-mono text-slate-400 uppercase">Simulated JSON Payload:</span>
-            <pre className="text-[11px] font-mono text-cyan-300 p-2 bg-navy-950 rounded overflow-x-auto">
+            <span className="text-[10px] text-slate-500 uppercase tracking-wide">Payload preview</span>
+            <pre className="text-[11px] font-mono text-emerald-300 p-2 bg-navy-950 rounded overflow-x-auto">
 {JSON.stringify(
   {
     consentHandle: 'AA-CONSENT-99402-AARAV',
@@ -319,9 +313,9 @@ export const CreditPassport: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-between pt-2">
-            <span className="text-slate-400 flex items-center gap-1.5">
+            <span className="text-slate-500 flex items-center gap-1.5">
               <KeyRound className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Cryptographically signed by AA node</span>
+              <span>Signed by the AA node</span>
             </span>
             <div className="flex items-center gap-2">
               <Button variant="secondary" size="sm" onClick={() => setShowShareModal(false)}>
@@ -334,10 +328,10 @@ export const CreditPassport: React.FC = () => {
                 onClick={() => {
                   setConsentGranted(true);
                   setShowShareModal(false);
-                  alert('Consent Granted! Synthetic Credit Passport payload transmitted to lender endpoint.');
+                  alert('Consent granted — passport shared with the lender.');
                 }}
               >
-                {consentGranted ? 'Consent Already Transmitted' : 'Approve & Transmit Consent'}
+                {consentGranted ? 'Already Shared' : 'Approve & Share'}
               </Button>
             </div>
           </div>
@@ -348,42 +342,42 @@ export const CreditPassport: React.FC = () => {
       <Modal
         isOpen={showExplainModal}
         onClose={() => setShowExplainModal(false)}
-        title="Credit Passport Mathematical Methodology"
-        subtitle="How the 78/100 composite score is derived"
+        title="How your score is calculated"
+        subtitle="The 78/100 composite score, broken down"
         maxWidth="md"
       >
         <div className="space-y-4 text-xs text-slate-300 leading-relaxed">
           <p>
-            The PayKavach Credit Passport evaluates transaction velocity and obligation reliability rather than static legacy bureau scores.
+            The Credit Passport looks at transaction velocity and obligation reliability, not a static legacy bureau score.
           </p>
-          <div className="space-y-2 p-3 bg-navy-850 rounded-xl border border-navy-750">
-            <div className="flex justify-between font-mono">
-              <span>1. Base Starting Score:</span>
+          <div className="space-y-2 p-3 bg-navy-850 rounded-xl border border-navy-800">
+            <div className="flex justify-between">
+              <span className="text-slate-400">Base starting score</span>
               <span className="text-white font-semibold">50 pts</span>
             </div>
-            <div className="flex justify-between font-mono text-emerald-400">
-              <span>2. 12/12 Months Salary:</span>
+            <div className="flex justify-between text-emerald-400">
+              <span>12/12 months salary credited</span>
               <span className="font-semibold">+15 pts</span>
             </div>
-            <div className="flex justify-between font-mono text-emerald-400">
-              <span>3. 96% On-Time Obligations:</span>
+            <div className="flex justify-between text-emerald-400">
+              <span>96% on-time obligations</span>
               <span className="font-semibold">+12 pts</span>
             </div>
-            <div className="flex justify-between font-mono text-emerald-400">
-              <span>4. Low Spending Volatility (±8%):</span>
+            <div className="flex justify-between text-emerald-400">
+              <span>Low spending volatility (±8%)</span>
               <span className="font-semibold">+9 pts</span>
             </div>
-            <div className="flex justify-between font-mono text-amber-400">
-              <span>5. Late EMI Penalty (March):</span>
+            <div className="flex justify-between text-amber-400">
+              <span>One late EMI in March</span>
               <span className="font-semibold">-8 pts</span>
             </div>
-            <div className="pt-2 border-t border-navy-700 flex justify-between font-mono font-bold text-white text-sm">
-              <span>Total Composite Score:</span>
+            <div className="pt-2 border-t border-navy-700 flex justify-between font-bold text-white text-sm">
+              <span>Total score</span>
               <span className="text-emerald-400">78 / 100</span>
             </div>
           </div>
           <p className="text-[11px] text-slate-400">
-            This transparent breakdown provides borrowers with clear agency: timely rent and steady payroll receipts can rehabilitate creditworthiness within 90 days.
+            This score can improve — steady salary credits and on-time rent over the next 90 days will raise it.
           </p>
         </div>
       </Modal>

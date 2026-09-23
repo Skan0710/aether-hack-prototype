@@ -17,85 +17,81 @@ export const VerdictScoreHeader: React.FC<VerdictScoreHeaderProps> = ({
 }) => {
   const config = {
     HOLD: {
-      border: 'border-rose-500/40 bg-gradient-to-r from-navy-900 via-rose-950/20 to-navy-900',
-      badge: 'bg-rose-500/20 text-rose-400 border border-rose-500/40',
+      border: 'border-rose-500/30',
+      badge: 'bg-rose-500/15 text-rose-400',
       text: 'text-rose-400',
       meter: 'bg-rose-500',
-      icon: <ShieldAlert className="w-8 h-8 text-rose-400 shrink-0" />,
-      tag: 'HOLD • INTERCEPTED',
+      iconWrap: 'bg-rose-500/10 text-rose-400',
+      icon: <ShieldAlert className="w-7 h-7" />,
+      tag: "Don't pay yet",
     },
     WARN: {
-      border: 'border-amber-500/40 bg-gradient-to-r from-navy-900 via-amber-950/20 to-navy-900',
-      badge: 'bg-amber-500/20 text-amber-400 border border-amber-500/40',
+      border: 'border-amber-500/30',
+      badge: 'bg-amber-500/15 text-amber-400',
       text: 'text-amber-400',
       meter: 'bg-amber-500',
-      icon: <AlertTriangle className="w-8 h-8 text-amber-400 shrink-0" />,
-      tag: 'WARN • ADVISORY',
+      iconWrap: 'bg-amber-500/10 text-amber-400',
+      icon: <AlertTriangle className="w-7 h-7" />,
+      tag: 'Proceed with caution',
     },
     ASK: {
-      border: 'border-blue-500/40 bg-gradient-to-r from-navy-900 via-blue-950/20 to-navy-900',
-      badge: 'bg-blue-500/20 text-blue-400 border border-blue-500/40',
+      border: 'border-blue-500/30',
+      badge: 'bg-blue-500/15 text-blue-400',
       text: 'text-blue-400',
       meter: 'bg-blue-500',
-      icon: <HelpCircle className="w-8 h-8 text-blue-400 shrink-0" />,
-      tag: 'ASK • VERIFY',
+      iconWrap: 'bg-blue-500/10 text-blue-400',
+      icon: <HelpCircle className="w-7 h-7" />,
+      tag: 'Needs quick verification',
     },
     PASS: {
-      border: 'border-emerald-500/40 bg-gradient-to-r from-navy-900 via-emerald-950/20 to-navy-900',
-      badge: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40',
+      border: 'border-emerald-500/30',
+      badge: 'bg-emerald-500/15 text-emerald-400',
       text: 'text-emerald-400',
       meter: 'bg-emerald-500',
-      icon: <ShieldCheck className="w-8 h-8 text-emerald-400 shrink-0" />,
-      tag: 'PASS • SAFE',
+      iconWrap: 'bg-emerald-500/10 text-emerald-400',
+      icon: <ShieldCheck className="w-7 h-7" />,
+      tag: 'Safe to proceed',
     },
   }[verdict];
 
   return (
-    <div className={`p-6 rounded-2xl border ${config.border} shadow-2xl relative overflow-hidden`}>
+    <div className={`p-6 sm:p-7 rounded-2xl border bg-navy-900 ${config.border}`}>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        {/* Left: Verdict title & explanation */}
-        <div className="space-y-2 max-w-2xl">
-          <div className="flex items-center gap-3">
-            <span className={`px-3 py-1 rounded-full text-xs font-bold font-mono tracking-wider ${config.badge}`}>
+        {/* Left: Verdict title & explanation — the bottom line first */}
+        <div className="flex items-start gap-4 min-w-0">
+          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 ${config.iconWrap}`}>
+            {config.icon}
+          </div>
+          <div className="space-y-1.5 min-w-0">
+            <span className={`text-xs font-semibold px-2 py-0.5 rounded-full inline-block ${config.badge}`}>
               {config.tag}
             </span>
-            <span className="text-xs text-slate-400 font-mono">
-              Decision Priority Applied: <span className="text-white font-semibold">{verdict}</span>
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 mt-1">
-            {config.icon}
-            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
               {title}
             </h1>
+            <p className="text-sm text-slate-400 leading-relaxed max-w-xl">
+              {explanation}
+            </p>
           </div>
-
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal pt-1">
-            {explanation}
-          </p>
         </div>
 
         {/* Right: Risk Score Meter */}
-        <div className="shrink-0 p-4 rounded-xl bg-navy-850/90 border border-navy-750 flex flex-col items-center justify-center min-w-[170px]">
-          <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-            Composite Risk Score
+        <div className="shrink-0 p-4 rounded-xl bg-navy-850 border border-navy-800 flex flex-col items-center justify-center min-w-[150px] self-stretch md:self-auto">
+          <span className="text-[11px] text-slate-500 uppercase tracking-wide">
+            Risk Score
           </span>
           <div className="flex items-baseline gap-1 my-1">
-            <span className={`text-4xl font-extrabold font-mono ${config.text}`}>
+            <span className={`text-3xl font-bold ${config.text}`}>
               {score}
             </span>
-            <span className="text-slate-400 text-sm font-mono">/ 100</span>
+            <span className="text-slate-500 text-sm">/ 100</span>
           </div>
-          <div className="w-full bg-navy-900 rounded-full h-2 mt-1 overflow-hidden">
+          <div className="w-full bg-navy-900 rounded-full h-1.5 mt-1 overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-700 ${config.meter}`}
               style={{ width: `${score}%` }}
             />
           </div>
-          <span className="text-[10px] text-slate-400 font-mono mt-2">
-            {score >= 75 ? 'Critical Threat Level' : score >= 40 ? 'Moderate Caution' : 'Minimal Threat'}
-          </span>
         </div>
       </div>
     </div>

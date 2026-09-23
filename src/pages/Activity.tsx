@@ -123,15 +123,11 @@ export const Activity: React.FC = () => {
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-400 font-mono">
-            <History className="w-4 h-4" />
-            <span>LOCAL TRANSACTION AUDIT LOG</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
-            Payment Screening History
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Payment History
           </h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Persistent ledger of AI pre-payment screenings, generated verdicts, and user feedback actions.
+          <p className="text-sm text-slate-400 mt-1.5">
+            Every payment PayKavach has screened, and what you decided to do.
           </p>
         </div>
         <Button
@@ -145,31 +141,33 @@ export const Activity: React.FC = () => {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-navy-900 border border-navy-800 rounded-xl">
-        <span className="text-xs font-mono text-slate-400 px-3 flex items-center gap-1.5">
+      <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-navy-900 border border-navy-800 rounded-xl">
+        <span className="text-xs text-slate-500 px-2 flex items-center gap-1.5">
           <Filter className="w-3.5 h-3.5" />
-          <span>Filter:</span>
         </span>
-        {(['ALL', 'PASS', 'WARN', 'HOLD', 'ASK'] as const).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setFilter(tab)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium font-mono transition-all ${
-              filter === tab
-                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold'
-                : 'text-slate-400 hover:text-white hover:bg-navy-800'
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
+        {(['ALL', 'PASS', 'WARN', 'HOLD', 'ASK'] as const).map((tab) => {
+          const labels: Record<string, string> = { ALL: 'All', PASS: 'Safe', WARN: 'Advisory', HOLD: 'Intercepted', ASK: 'Needs review' };
+          return (
+            <button
+              key={tab}
+              onClick={() => setFilter(tab)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                filter === tab
+                  ? 'bg-emerald-500/15 text-emerald-300'
+                  : 'text-slate-400 hover:text-white hover:bg-navy-800'
+              }`}
+            >
+              {labels[tab]}
+            </button>
+          );
+        })}
       </div>
 
       {/* History Items List */}
-      <Card className="border-navy-750">
+      <Card>
         <CardHeader
-          title={`Screened Payments (${filteredHistory.length})`}
-          subtitle="Click on any screening record to review the complete multi-model verdict"
+          title={`${filteredHistory.length} screened payments`}
+          subtitle="Click any record to review the full verdict"
         />
         <CardContent className="space-y-3">
           {filteredHistory.length === 0 ? (
@@ -187,24 +185,24 @@ export const Activity: React.FC = () => {
               <div
                 key={item.id}
                 onClick={() => navigate(`/verdict/${item.id}`)}
-                className="p-4 rounded-xl bg-navy-850 hover:bg-navy-800 border border-navy-800 hover:border-navy-700 transition-all cursor-pointer group flex flex-col md:flex-row md:items-center justify-between gap-4"
+                className="p-4 rounded-xl bg-navy-850 hover:bg-navy-800 border border-navy-800 transition-colors cursor-pointer group flex flex-col md:flex-row md:items-center justify-between gap-4"
               >
-                {/* Left: Icon, Payee, Date */}
+                {/* Left: Avatar, Payee, Date */}
                 <div className="flex items-start sm:items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-navy-800 border border-navy-750 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-navy-800 flex items-center justify-center shrink-0">
                     {getVerdictIcon(item.verdict)}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h4 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
+                      <h4 className="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">
                         {item.payeeDetails.name}
                       </h4>
                       <VerdictBadge verdict={item.verdict} size="sm" />
                     </div>
-                    <p className="text-xs text-slate-400 font-mono mt-0.5">
-                      {item.payeeDetails.vpa} • {new Date(item.timestamp).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      {item.payeeDetails.vpa} · {new Date(item.timestamp).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                     </p>
-                    <p className="text-xs text-slate-300 mt-1 line-clamp-1">
+                    <p className="text-xs text-slate-400 mt-1 line-clamp-1">
                       {item.explanation}
                     </p>
                   </div>
@@ -213,10 +211,10 @@ export const Activity: React.FC = () => {
                 {/* Right: Amount & Feedback Actions */}
                 <div className="flex items-center justify-between md:justify-end gap-4 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-navy-800">
                   <div className="text-left md:text-right">
-                    <span className="text-base font-bold text-white font-mono block">
+                    <span className="text-base font-semibold text-white block">
                       {formatINR(item.amount)}
                     </span>
-                    <span className="text-[11px] text-slate-400 font-mono">
+                    <span className="text-[11px] text-slate-500">
                       Risk {item.fusedRiskScore}/100
                     </span>
                   </div>
@@ -250,7 +248,7 @@ export const Activity: React.FC = () => {
                       onClick={(e) => handleUpdateStatus(e, item.id, 'verified')}
                       className={`p-1.5 rounded-lg border text-xs transition-colors ${
                         item.userActionTaken === 'verified'
-                          ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40'
+                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
                           : 'bg-navy-800 text-slate-400 border-navy-700 hover:text-white'
                       }`}
                     >

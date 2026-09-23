@@ -48,64 +48,59 @@ export const CashFlowVisualizer: React.FC<CashFlowVisualizerProps> = ({ cashFlow
   ];
 
   return (
-    <Card className="border-amber-500/40 bg-gradient-to-b from-navy-900 to-amber-950/10 shadow-glow-warn">
+    <Card className="border-amber-500/25">
       <CardHeader
-        title="Cash-Flow Foresight & Liquidity Projection"
-        subtitle="Forward-looking simulation before next salary credit"
+        title="Cash-Flow Foresight"
+        subtitle="What your balance looks like before your next salary credit"
         icon={<TrendingDown className="w-5 h-5 text-amber-400" />}
         action={
-          <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-mono font-bold">
-            Shortfall: {formatINR(cashFlow.shortfall)}
+          <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/25 font-semibold">
+            Short by {formatINR(cashFlow.shortfall)}
           </span>
         }
       />
       <CardContent className="space-y-6">
         {/* Core Shortfall Callout Banner */}
-        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
+        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-          <div className="space-y-1">
-            <h4 className="text-sm font-bold text-amber-300">
-              ₹{cashFlow.shortfall.toLocaleString('en-IN')} Projected Deficit in 5 Days
-            </h4>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              "You can afford this today, but rent and your EMI are due in 5 days — you'd be short by <strong className="text-white">₹{cashFlow.shortfall.toLocaleString('en-IN')}</strong>. Salary lands on the 1st: buy then, or split it?"
-            </p>
-          </div>
+          <p className="text-sm text-slate-200 leading-relaxed">
+            "You can afford this today, but rent and your EMI are due in 5 days — you'd be short by <strong className="text-white">₹{cashFlow.shortfall.toLocaleString('en-IN')}</strong>. Salary lands on the 1st: buy then, or split it?"
+          </p>
         </div>
 
         {/* 4 Key Financial Metrics */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="p-3 rounded-xl bg-navy-850 border border-navy-800">
-            <span className="text-[10px] font-mono text-slate-400 uppercase">Today's Balance</span>
-            <p className="text-sm font-bold text-white font-mono mt-1">
+            <span className="text-[11px] text-slate-500">Today's Balance</span>
+            <p className="text-sm font-semibold text-white mt-1">
               {formatINR(cashFlow.currentBalance)}
             </p>
           </div>
           <div className="p-3 rounded-xl bg-navy-850 border border-navy-800">
-            <span className="text-[10px] font-mono text-slate-400 uppercase">After Purchase</span>
-            <p className="text-sm font-bold text-slate-200 font-mono mt-1">
+            <span className="text-[11px] text-slate-500">After Purchase</span>
+            <p className="text-sm font-semibold text-slate-200 mt-1">
               {formatINR(cashFlow.currentBalance - cashFlow.paymentAmount)}
             </p>
           </div>
           <div className="p-3 rounded-xl bg-navy-850 border border-navy-800">
-            <span className="text-[10px] font-mono text-slate-400 uppercase">5-Day Obligations</span>
-            <p className="text-sm font-bold text-amber-300 font-mono mt-1">
+            <span className="text-[11px] text-slate-500">5-Day Obligations</span>
+            <p className="text-sm font-semibold text-amber-300 mt-1">
               {formatINR(cashFlow.obligationsTotal)}
             </p>
           </div>
-          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30">
-            <span className="text-[10px] font-mono text-rose-300 uppercase font-semibold">Net Shortfall</span>
-            <p className="text-sm font-extrabold text-rose-400 font-mono mt-1">
+          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/25">
+            <span className="text-[11px] text-rose-300/80 font-medium">Net Shortfall</span>
+            <p className="text-sm font-bold text-rose-400 mt-1">
               -{formatINR(cashFlow.shortfall)}
             </p>
           </div>
         </div>
 
         {/* Liquidity Waterfall Bar Chart */}
-        <div className="p-4 rounded-xl bg-navy-950/60 border border-navy-800 space-y-2">
-          <div className="text-xs font-semibold text-slate-300 flex items-center justify-between">
-            <span>Projected Liquidity Trajectory (INR)</span>
-            <span className="text-[10px] font-mono text-slate-400">Zero-line threshold</span>
+        <div className="p-4 rounded-xl bg-navy-850/60 border border-navy-800 space-y-2">
+          <div className="text-xs font-medium text-slate-300 flex items-center justify-between">
+            <span>Projected balance trajectory</span>
+            <span className="text-[11px] text-slate-500">Salary arrives in 8 days (1st)</span>
           </div>
           <div className="h-48 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -129,8 +124,8 @@ export const CashFlowVisualizer: React.FC<CashFlowVisualizerProps> = ({ cashFlow
                     if (active && payload && payload.length) {
                       const data = payload[0].payload;
                       return (
-                        <div className="bg-navy-900 border border-navy-750 p-2.5 rounded-lg shadow-xl text-xs font-mono">
-                          <p className="text-slate-300 font-sans font-medium">{data.name}</p>
+                        <div className="bg-navy-900 border border-navy-750 p-2.5 rounded-lg shadow-soft-lg text-xs">
+                          <p className="text-slate-300 font-medium">{data.name}</p>
                           <p className={`font-bold mt-1 ${data.amount < 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
                             {formatINR(data.amount)}
                           </p>
@@ -157,25 +152,25 @@ export const CashFlowVisualizer: React.FC<CashFlowVisualizerProps> = ({ cashFlow
 
         {/* Timeline Horizon */}
         <div className="space-y-2">
-          <div className="text-xs font-semibold text-slate-300 flex items-center gap-1.5 font-mono">
-            <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+            <Calendar className="w-3.5 h-3.5 text-slate-400" />
             <span>Horizon to Next Salary Credit</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
             <div className="p-3 rounded-lg bg-navy-850 border border-navy-800">
-              <span className="text-emerald-400 font-mono font-semibold">Step 1: Today</span>
+              <span className="text-slate-400 font-semibold">Step 1: Today</span>
               <p className="text-slate-200 mt-1 font-medium">₹30,000 at Croma</p>
               <p className="text-[11px] text-slate-400">Leaves ₹18,500 cash in account</p>
             </div>
             <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/30">
-              <span className="text-amber-400 font-mono font-semibold">Step 2: In 5 Days</span>
+              <span className="text-amber-400 font-semibold">Step 2: In 5 Days</span>
               <p className="text-slate-200 mt-1 font-medium">₹26,500 Scheduled Bills</p>
-              <p className="text-[11px] text-amber-300 font-mono">Deficit of -₹8,000 hits account</p>
+              <p className="text-[11px] text-amber-300">Deficit of -₹8,000 hits account</p>
             </div>
-            <div className="p-3 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
-              <span className="text-cyan-400 font-mono font-semibold">Step 3: 1st of Month</span>
+            <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+              <span className="text-emerald-400 font-semibold">Step 3: 1st of Month</span>
               <p className="text-slate-200 mt-1 font-medium">Salary Credited</p>
-              <p className="text-[11px] text-cyan-300">Safe, fully funded purchase window</p>
+              <p className="text-[11px] text-emerald-300">Safe, fully funded purchase window</p>
             </div>
           </div>
         </div>

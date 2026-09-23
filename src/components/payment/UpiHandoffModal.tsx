@@ -89,7 +89,7 @@ export const UpiHandoffModal: React.FC<UpiHandoffModalProps> = ({
         {/* Generated Intent URI */}
         <div className="p-2.5 rounded-lg bg-navy-950 border border-navy-800 text-left">
           <span className="text-[10px] font-mono text-slate-400 block mb-1">Generated NPCI URI:</span>
-          <p className="text-[11px] font-mono text-cyan-300 break-all select-all">
+          <p className="text-[11px] font-mono text-emerald-400 break-all select-all">
             {upiUri}
           </p>
         </div>
@@ -112,7 +112,7 @@ export const UpiHandoffModal: React.FC<UpiHandoffModalProps> = ({
             size="md"
             rightIcon={<ExternalLink className="w-4 h-4" />}
             onClick={handleLaunchUpi}
-            className="shadow-glow-pass w-full sm:w-auto"
+            className="w-full sm:w-auto"
           >
             Launch UPI App
           </Button>
