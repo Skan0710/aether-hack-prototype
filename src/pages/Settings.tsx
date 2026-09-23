@@ -4,7 +4,6 @@ import { Card, CardHeader, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import {
   Settings as SettingsIcon,
-  Globe,
   Trash2,
   RotateCcw,
   Shield,
@@ -15,14 +14,7 @@ import {
 } from 'lucide-react';
 
 export const Settings: React.FC = () => {
-  const [currentLang, setCurrentLang] = useState<'en' | 'hi'>(storageService.getLanguage());
   const [statusNotice, setStatusNotice] = useState<string | null>(null);
-
-  const handleLanguageChange = (lang: 'en' | 'hi') => {
-    storageService.setLanguage(lang);
-    setCurrentLang(lang);
-    showNotice(`Language updated to ${lang === 'en' ? 'English' : 'हिन्दी'}`);
-  };
 
   const handleClearHistory = () => {
     if (confirm('Are you sure you want to delete all local payment screening records?')) {
@@ -56,7 +48,7 @@ export const Settings: React.FC = () => {
           Settings & Privacy
         </h1>
         <p className="text-sm text-slate-400 mt-1">
-          Manage local demo state, review privacy boundaries, and configure language preferences.
+          Manage local demo state, review privacy boundaries, and inspect simulation safeguards.
         </p>
       </div>
 
@@ -66,48 +58,6 @@ export const Settings: React.FC = () => {
           <span>{statusNotice}</span>
         </div>
       )}
-
-      {/* Language Selector */}
-      <Card className="border-navy-750">
-        <CardHeader
-          title="Display Language"
-          subtitle="Toggle application explanations and UI text"
-          icon={<Globe className="w-5 h-5 text-emerald-400" />}
-        />
-        <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <button
-              onClick={() => handleLanguageChange('en')}
-              className={`p-4 rounded-xl border text-left transition-all ${
-                currentLang === 'en'
-                  ? 'border-emerald-500 bg-emerald-500/10'
-                  : 'border-navy-800 bg-navy-850 hover:border-navy-700'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="font-bold text-white text-sm">English</span>
-                {currentLang === 'en' && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
-              </div>
-              <p className="text-xs text-slate-400">Default English explanations and technical terminology.</p>
-            </button>
-
-            <button
-              onClick={() => handleLanguageChange('hi')}
-              className={`p-4 rounded-xl border text-left transition-all ${
-                currentLang === 'hi'
-                  ? 'border-emerald-500 bg-emerald-500/10'
-                  : 'border-navy-800 bg-navy-850 hover:border-navy-700'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="font-bold text-white text-sm">हिन्दी (Hindi)</span>
-                {currentLang === 'hi' && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
-              </div>
-              <p className="text-xs text-slate-400">भारतीय उपयोगकर्ताओं के लिए सरल व सुलभ भाषा में समझाइश।</p>
-            </button>
-          </div>
-        </CardContent>
-      </Card>
 
       {/* Product Boundaries & Privacy Disclosures */}
       <Card className="border-navy-750">

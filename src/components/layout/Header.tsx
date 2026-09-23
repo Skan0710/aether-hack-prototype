@@ -5,15 +5,9 @@ import { formatINR } from '../../utils/formatCurrency';
 
 interface HeaderProps {
   onOpenMobileMenu: () => void;
-  language: 'en' | 'hi';
-  onToggleLanguage: (lang: 'en' | 'hi') => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({
-  onOpenMobileMenu,
-  language,
-  onToggleLanguage,
-}) => {
+export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
   return (
     <header className="h-16 border-b border-navy-800 bg-navy-900/85 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30">
       {/* Left: Mobile hamburger & status */}
@@ -31,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Right: Balance, Language, User */}
+      {/* Right: Balance, User */}
       <div className="flex items-center gap-2 sm:gap-4">
         {/* Balance Pill */}
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-navy-800/70 border border-navy-750">
@@ -39,30 +33,6 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="text-xs sm:text-sm font-semibold text-white">
             {formatINR(INITIAL_DEMO_USER.currentBalance)}
           </span>
-        </div>
-
-        {/* Language selector toggle */}
-        <div className="flex items-center bg-navy-800 rounded-lg p-0.5 border border-navy-700">
-          <button
-            onClick={() => onToggleLanguage('en')}
-            className={`px-2 py-1 text-xs rounded-md font-medium transition-all ${
-              language === 'en'
-                ? 'bg-emerald-500/20 text-emerald-300 font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            EN
-          </button>
-          <button
-            onClick={() => onToggleLanguage('hi')}
-            className={`px-2 py-1 text-xs rounded-md font-medium transition-all ${
-              language === 'hi'
-                ? 'bg-emerald-500/20 text-emerald-300 font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            हिन्दी
-          </button>
         </div>
 
         {/* User Pill */}
