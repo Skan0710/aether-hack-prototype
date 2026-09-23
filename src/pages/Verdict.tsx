@@ -9,6 +9,8 @@ import { CheckBreakdownGrid } from '../components/verdict/CheckBreakdownGrid';
 import { MomVerificationModal } from '../components/verdict/MomVerificationModal';
 import { CoolOffTimerModal } from '../components/verdict/CoolOffTimerModal';
 import { AskQuestionWidget } from '../components/verdict/AskQuestionWidget';
+import { CashFlowVisualizer } from '../components/verdict/CashFlowVisualizer';
+import { UpiHandoffModal } from '../components/payment/UpiHandoffModal';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { formatINR } from '../utils/formatCurrency';
@@ -34,6 +36,7 @@ export const Verdict: React.FC = () => {
   const [verdict, setVerdict] = useState<PaymentVerdict | null>(null);
   const [showMomCallModal, setShowMomCallModal] = useState(false);
   const [showCoolOffModal, setShowCoolOffModal] = useState(false);
+  const [showUpiModal, setShowUpiModal] = useState(false);
   const [coolOffCompleted, setCoolOffCompleted] = useState(false);
   const [feedbackStatus, setFeedbackStatus] = useState<string | null>(null);
 
@@ -126,6 +129,11 @@ export const Verdict: React.FC = () => {
 
       {/* Sub-Engine Check Breakdown */}
       <CheckBreakdownGrid checks={verdict.checks} />
+
+      {/* Cash Flow Foresight Visualizer if present */}
+      {verdict.checks.cashFlow && (
+        <CashFlowVisualizer cashFlow={verdict.checks.cashFlow} />
+      )}
 
       {/* Transaction & Payee Context Card */}
       <Card className="border-navy-750">
@@ -250,7 +258,7 @@ export const Verdict: React.FC = () => {
                 variant="warning"
                 size="lg"
                 leftIcon={<Timer className="w-5 h-5" />}
-                onClick={() => handleAction('remind_1st', 'Reminder set for the 1st of next month after salary credit.')}
+                onClick={() => handleAction('remind_1st', 'Reminder scheduled for the 1st of the month after salary credit.')}
               >
                 Remind Me on the 1st
               </Button>
@@ -258,7 +266,10 @@ export const Verdict: React.FC = () => {
                 variant="outline"
                 size="lg"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
-                onClick={() => handleAction('paid', 'Proceeding to simulated UPI Handoff with caution advisory.')}
+                onClick={() => {
+                  handleAction('paid', 'Proceeding with simulated UPI handoff despite deficit warning.');
+                  setShowUpiModal(true);
+                }}
               >
                 Pay Anyway
               </Button>
@@ -276,9 +287,8 @@ export const Verdict: React.FC = () => {
                 size="lg"
                 rightIcon={<ExternalLink className="w-4 h-4" />}
                 onClick={() => {
-                  const upiUrl = `upi://pay?pa=${encodeURIComponent(verdict.payeeDetails.vpa)}&pn=${encodeURIComponent(verdict.payeeDetails.name)}&am=${encodeURIComponent(verdict.amount)}&cu=INR`;
-                  window.location.href = upiUrl;
-                  handleAction('paid', `Initiated UPI intent: ${upiUrl}`);
+                  setShowUpiModal(true);
+                  handleAction('paid', 'Initiating UPI intent handoff.');
                 }}
                 className="shadow-glow-pass w-full sm:w-auto"
               >
@@ -288,6 +298,15 @@ export const Verdict: React.FC = () => {
           )}
         </CardContent>
       </Card>
+
+      {/* UPI Handoff Modal */}
+      <UpiHandoffModal
+        isOpen={showUpiModal}
+        onClose={() => setShowUpiModal(false)}
+        vpa={verdict.payeeDetails.vpa}
+        payeeName={verdict.payeeDetails.name}
+        amount={verdict.amount}
+      />
 
       {/* Mom Verification Modal */}
       <MomVerificationModal
