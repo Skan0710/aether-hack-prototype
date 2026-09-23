@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppLayout } from '../components/layout/AppLayout';
 import { Dashboard } from '../pages/Dashboard';
 import { PaymentCheck } from '../pages/PaymentCheck';
+import { Verdict } from '../pages/Verdict';
 
 // Temporary placeholders for future commits
 const PlaceholderPage = ({ title, desc }: { title: string; desc: string }) => (
@@ -19,7 +20,7 @@ export const AppRouter: React.FC = () => {
         <Route element={<AppLayout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/check" element={<PaymentCheck />} />
-          <Route path="/verdict/:id?" element={<PlaceholderPage title="Payment Verdict" desc="Explainable verdict analysis" />} />
+          <Route path="/verdict/:id?" element={<Verdict />} />
           <Route path="/credit-passport" element={<PlaceholderPage title="Credit Passport" desc="Synthetic cash-flow health passport" />} />
           <Route path="/activity" element={<PlaceholderPage title="Activity History" desc="Local payment check history" />} />
           <Route path="/settings" element={<PlaceholderPage title="Settings & Privacy" desc="Preferences, consent, and demo reset" />} />
